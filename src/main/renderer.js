@@ -1,6 +1,3 @@
-
-
-
 const audio = new Audio();
 
 const buttonElement = document.getElementById('button')
