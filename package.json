@@ -2,9 +2,9 @@
     "name": "llama-player",
     "version": "1.0.0",
     "description": "A minimal Electron application",
-    "main": "./src/main/main.js",
+    "main": "src/main/main-process/main.js",
     "scripts": {
-        "start": "electron src/main/main.js",
+        "start": "electron .",
         "test": "jest"
     },
     "repository": "https://github.com/Ch3shireDev/llama-player",
@@ -18,8 +18,15 @@
     "author": "GitHub",
     "license": "CC0-1.0",
     "devDependencies": {
+        "@babel/core": "^7.18.6",
+        "@babel/preset-env": "^7.18.6",
+        "babel-jest": "^28.1.2",
+        "babel-plugin-dynamic-import-node": "^2.3.3",
+        "cross-env": "^7.0.3",
         "electron": "^19.0.6",
         "electron-reload": "^2.0.0-alpha.1",
         "jest": "^28.1.2"
+    },
+    "dependencies": {
     }
 }

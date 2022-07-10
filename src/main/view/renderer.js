@@ -1,3 +1,7 @@
+import {MusicPlayer} from "../library/musicPlayer.js";
+
+const musicPlayer = new MusicPlayer();
+
 const audio = new Audio();
 
 const buttonElement = document.getElementById('button')
@@ -35,7 +39,7 @@ stop.onclick = () => {
 
 const songs = []
 
-function showSongs(){
+function showSongs() {
     const songsList = document.getElementById('songs-list')
     songsList.innerHTML = '';
     for (let i = 0; i < songs.length; i++) {
@@ -65,3 +69,4 @@ window.electronAPI.playMusic((event, file) => {
     songs.push(file);
     showSongs();
 });
+

@@ -16,3 +16,4 @@ contextBridge.exposeInMainWorld('electronAPI', {
     playMusic: (callback) => ipcRenderer.on('play-music', callback),
 
 });
+

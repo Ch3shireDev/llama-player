@@ -1,11 +1,11 @@
 const {app, BrowserWindow, ipcMain, Menu, dialog} = require('electron')
 const path = require('path')
 const reload = require('electron-reload');
-const fs = require('fs');
+const {Filedata} = require("../library/filedata.js");
 
 
 reload(__dirname, {
-    electron: path.join(__dirname, '../../', 'node_modules', '.bin', 'electron')
+    electron: path.join(__dirname, '../../..', 'node_modules', '.bin', 'electron')
 });
 
 let mainWindow = null;
@@ -16,9 +16,11 @@ function createWindow() {
         width: 800,
         height: 600,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js'),
+            preload: path.join(__dirname, '../renderer-process/preload.js'),
             nodeIntegration: true,
             devTools: true,
+
+            // allowRunningInsecureContent: true
             // allowRunningInsecureContent: true,
             // webSecurity: false
         }
@@ -27,14 +29,13 @@ function createWindow() {
     mainWindow.webContents.openDevTools()
     setMenuItems(mainWindow);
     // and load the index.html of the app.
-    mainWindow.loadFile('index.html')
+    mainWindow.loadFile(path.join(__dirname,'../view/index.html'))
 
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
 
     ipcMain.on('send-music', (event, filePath) => {
-        const file = sendMusicFile(filePath)
-        mainWindow.webContents.send('play-music', file)
+        sendMusicFile(filePath)
     });
 }
 
@@ -51,11 +52,7 @@ app.on('window-all-closed', function () {
 })
 
 function sendMusicFile(filepath) {
-
-    const filename = path.basename(filepath);
-    const filebytes = fs.readFileSync(filepath);
-    const file = {filename, filebytes, filepath};
-
+    const file = Filedata.loadFromPath(filepath);
     mainWindow.webContents.send('play-music', file);
 }
 
