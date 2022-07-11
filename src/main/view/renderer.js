@@ -1,8 +1,8 @@
 import {MusicPlayer} from "../library/musicPlayer.js";
+import {AudioRunner} from "../library/audioRunner.js";
 
-const musicPlayer = new MusicPlayer();
-
-const audio = new Audio();
+const audioRunner = new AudioRunner();
+const musicPlayer = new MusicPlayer(audioRunner);
 
 const buttonElement = document.getElementById('button')
 const dialog = document.createElement("input");
@@ -25,16 +25,16 @@ const pause = document.getElementById('pause')
 const stop = document.getElementById('stop')
 
 pause.onclick = () => {
-    audio.pause();
+    // audio.pause();
 }
 
 play.onclick = () => {
-    audio.play();
+    // audio.play();
 }
 
 stop.onclick = () => {
-    audio.fastSeek(0);
-    audio.pause();
+    // audio.fastSeek(0);
+    // audio.pause();
 }
 
 const songs = []
@@ -56,17 +56,7 @@ buttonElement.addEventListener('click', () => {
     dialog.click();
 })
 
-function playMusic(file) {
-    audio.src = URL.createObjectURL(new Blob([file.filebytes], {
-        type: 'audio/mp3'
-    }));
-    audio.play();
-}
-
 window.electronAPI.playMusic((event, file) => {
-    playMusic(file);
-    document.getElementById('music-tab').innerText = `Aktualnie odtwarzane: ${file.filename}`;
-    songs.push(file);
-    showSongs();
+    musicPlayer.addFile(file);
 });
 

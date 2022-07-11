@@ -1,8 +1,13 @@
 export class MusicPlayer {
     _isPlaying = false;
+    songs = []
 
-    constructor() {
-        console.log('hello')
+    /**
+     * @param {IAudioRunner} audioRunner
+     * @param audioRunner
+     */
+    constructor(audioRunner) {
+        this.audioRunner = audioRunner;
     }
 
     isPlaying() {
@@ -14,5 +19,7 @@ export class MusicPlayer {
      */
     addFile(filedata) {
         this._isPlaying = true;
+        this.songs.push(filedata)
+        this.audioRunner.play(filedata);
     }
 }
