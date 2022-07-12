@@ -1,4 +1,4 @@
-import {IAudioRunner} from "../../main/library/IAudioRunner";
+import {IAudioRunner} from "../../main/library/IAudioRunner.js";
 
 export class MockAudioRunner extends IAudioRunner {
 
@@ -17,5 +17,18 @@ export class MockAudioRunner extends IAudioRunner {
     stop() {
         this.playFile = null;
         this._isPlaying = false;
+        this.currentPosition = 0;
+    }
+
+    pause(){
+        this._isPlaying = false;
+    }
+
+    setPosition(position){
+        this.currentPosition = position;
+    }
+
+    getPosition(){
+        return this.currentPosition;
     }
 }

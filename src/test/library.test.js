@@ -1,22 +1,12 @@
 import {MusicPlayer} from "../main/library/musicPlayer";
 import {MockAudioRunner} from "./mockups/mockAudioRunner";
-import {ISongDisplay} from "../main/library/ISongDisplay";
+import {MockSongDisplay} from "./mockups/mockSongDisplay";
 
 const {Filedata} = require("../main/library/filedata");
 
 let audioRunner = {};
 let musicPlayer = {};
 let songDisplay = {};
-
-class MockSongDisplay extends ISongDisplay{
-    constructor(){
-        super();
-    }
-    render(songs, currentSong){
-        this.songs = songs;
-        this.currentSong = currentSong;
-    }
-}
 
 beforeEach(() => {
     audioRunner = new MockAudioRunner();
@@ -66,4 +56,62 @@ test('user can add multiple files to playlist', () => {
     expect(audioRunner.playFile.filename).toBe('test-3.mp3');
     musicPlayer.playNext();
     expect(audioRunner.playFile.filename).toBe('test-3.mp3');
+});
+
+test('user can pause playing', ()=>{
+    musicPlayer.addFile(new Filedata('test.mp3'));
+    musicPlayer.play();
+    expect(audioRunner.isPlaying()).toBe(true);
+    expect(musicPlayer.isPlaying()).toBe(true);
+
+    musicPlayer.pause();
+    expect(audioRunner.isPlaying()).toBe(false);
+    expect(musicPlayer.isPlaying()).toBe(false);
+});
+
+test('user can stop playing', ()=>{
+    musicPlayer.addFile(new Filedata('test.mp3'));
+    musicPlayer.play();
+    expect(audioRunner.isPlaying()).toBe(true);
+    expect(musicPlayer.isPlaying()).toBe(true);
+
+    musicPlayer.stop();
+    expect(audioRunner.isPlaying()).toBe(false);
+    expect(musicPlayer.isPlaying()).toBe(false);
+});
+
+test('user can pause and resume playing', ()=>{
+    musicPlayer.addFile(new Filedata('test.mp3'));
+    musicPlayer.play();
+    expect(audioRunner.isPlaying()).toBe(true);
+    expect(musicPlayer.isPlaying()).toBe(true);
+    musicPlayer.setPosition(0.5);
+
+    musicPlayer.pause();
+    expect(audioRunner.isPlaying()).toBe(false);
+    expect(musicPlayer.isPlaying()).toBe(false);
+    expect(musicPlayer.getPosition()).toBe(0.5);
+
+    musicPlayer.play();
+    expect(audioRunner.isPlaying()).toBe(true);
+    expect(musicPlayer.isPlaying()).toBe(true);
+    expect(musicPlayer.getPosition()).toBe(0.5);
+});
+
+test('user can stop playing and start playing from beginning', ()=>{
+    musicPlayer.addFile(new Filedata('test.mp3'));
+    musicPlayer.play();
+    expect(audioRunner.isPlaying()).toBe(true);
+    expect(musicPlayer.isPlaying()).toBe(true);
+    musicPlayer.setPosition(0.5);
+
+    musicPlayer.stop();
+    expect(audioRunner.isPlaying()).toBe(false);
+    expect(musicPlayer.isPlaying()).toBe(false);
+    expect(musicPlayer.getPosition()).toBe(0);
+
+    musicPlayer.play();
+    expect(audioRunner.isPlaying()).toBe(true);
+    expect(musicPlayer.isPlaying()).toBe(true);
+    expect(musicPlayer.getPosition()).toBe(0);
 });

@@ -4,11 +4,8 @@ export class AudioRunner extends IAudioRunner {
     constructor() {
         super();
         this.audio = new Audio();
-        // this.audio.autoplay = true;
-        // this.audio.loop = true;
-        // this.audio.volume = 0.5;
         this._isPlaying = false;
-        this.currentTime = 0;
+        this.currentPosition = 0;
     }
 
 
@@ -21,7 +18,7 @@ export class AudioRunner extends IAudioRunner {
             type: 'audio/mp3'
         }));
 
-        this.audio.currentTime = this.currentTime;
+        this.audio.currentTime = this.currentPosition;
         this.audio.play();
         this._isPlaying = true;
     }
@@ -30,16 +27,20 @@ export class AudioRunner extends IAudioRunner {
         this.audio.pause();
         this.audio.currentTime = 0;
         this._isPlaying = false;
-        this.currentTime = 0;
+        this.currentPosition = 0;
     }
 
     pause() {
         this.audio.pause();
         this._isPlaying = false;
-        this.currentTime = this.audio.currentTime;
+        this.currentPosition = this.audio.currentTime;
     }
 
     setPosition(position) {
         this.audio.fastSeek(position);
+    }
+
+    getPosition() {
+        return this.audio.currentTime;
     }
 }

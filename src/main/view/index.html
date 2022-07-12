@@ -10,8 +10,8 @@
 <body>
 <div class="top-panel">
     <div class="left-top">
-        <button id="button">Przycisk</button>
         <p id="music-tab"></p>
+        <button id="button">Dodaj piosenki</button>
     </div>
     <div class="right">
         <ul id="song-display">
@@ -20,11 +20,16 @@
     </div>
 </div>
 <div class="bottom-panel">
-    <button id="previous">Previous</button>
-    <button id="pause">Pause</button>
-    <button id="play">Play</button>
-    <button id="stop">Stop</button>
-    <button id="next">Next</button>
+    <div class="playback-controls">
+        <button id="previous">Previous</button>
+        <button id="pause">Pause</button>
+        <button id="play">Play</button>
+        <button id="stop">Stop</button>
+        <button id="next">Next</button>
+    </div>
+    <div class="progress-indicator-container">
+        <input id="progress-indicator" type="range" min="1" max="100" value="50">
+    </div>
 </div>
 </body>
 </html>

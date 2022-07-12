@@ -66,13 +66,6 @@ export class MusicPlayer {
         this.refresh();
     }
 
-    pause() {
-        if(!this.audioRunner.isPlaying()) return;
-        this.audioRunner.pause();
-        this._isPlaying = false;
-        this.refresh();
-    }
-
     play() {
         if(this.audioRunner.isPlaying()) return;
         this.audioRunner.play(this.currentSong);
@@ -86,10 +79,25 @@ export class MusicPlayer {
         this.play();
     }
 
+    pause() {
+        if(!this.audioRunner.isPlaying()) return;
+        this.audioRunner.pause();
+        this._isPlaying = false;
+        this.refresh();
+    }
+
     stop() {
         if(!this.audioRunner.isPlaying()) return;
         this.audioRunner.stop();
         this._isPlaying = false;
         this.refresh();
+    }
+
+    setPosition(position) {
+        this.audioRunner.setPosition(position);
+    }
+
+    getPosition() {
+        return this.audioRunner.getPosition();
     }
 }

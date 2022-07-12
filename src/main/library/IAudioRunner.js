@@ -7,4 +7,5 @@ export class IAudioRunner {
     stop(){}
     pause(){}
     setPosition(position){}
+    getPosition(){}
 }

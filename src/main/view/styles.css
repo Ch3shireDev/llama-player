@@ -14,16 +14,33 @@ body {
 }
 
 .bottom-panel {
-    display: inline-grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     flex-grow: 0;
-    max-height: 20%;
-    align-content: center;
     background: #2f2f2f;
-    padding:0.2rem 0.5rem;
 }
 
-.bottom-panel button{
+.playback-controls {
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    align-content: center;
+    padding: 0.2rem 0.5rem;
+}
+
+.progress-indicator-container {
+    display: inline-grid;
+}
+
+#progress-indicator {
+    width: 80%;
+    margin: 0 auto 1rem;
+    background: #2f2f2f;
+    accent-color: #6f6f6f;
+    height: 6px;
+    border-radius: 5px;
+}
+
+.bottom-panel button {
     margin: 1rem;
     min-height: 2rem;
 }
@@ -31,22 +48,22 @@ body {
 .left-top {
     background: #6f6f6f;
     width: 50%;
-    padding:1rem;
+    padding: 1rem;
 }
 
 .right {
-    padding:0rem 1rem;
+    padding: 0 1rem;
     background: #2a2a2a;
     width: 50%;
 }
 
-#song-display{
-    margin:1rem;
+#song-display {
+    margin: 1rem;
     padding: 0;
 }
 
-.song-element{
-    color:whitesmoke;
+.song-element {
+    color: whitesmoke;
     padding: 0.2rem;
     list-style-type: none;
     font-weight: 400;
@@ -55,11 +72,27 @@ body {
     cursor: pointer;
 }
 
-.song-element:hover{
+.song-element:hover {
     background: #585858;
 }
 
-.current-song, .current-song:hover{
+.current-song, .current-song:hover {
     background: #6f6f6f;
     color: #2a2a2a;
+}
+
+button{
+    border-radius: 1rem;
+    border: #6f6f6f;
+    background: #2a2a2a;
+    color: whitesmoke;
+    box-shadow: 0 0 0.5rem #aaaaaa;
+    padding:0.5rem 1rem
+}
+
+button:hover{
+    cursor:pointer;
+    background: #2f2f2f;
+    /*color: #2a2a2a;*/
+    box-shadow: 0 0 0.5rem #0a0a0a;
 }
