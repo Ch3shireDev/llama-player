@@ -1,8 +1,15 @@
 import {MusicPlayer} from "../library/musicPlayer.js";
 import {AudioRunner} from "../library/audioRunner.js";
+import {SongDisplay} from "../library/songDisplay.js";
+
+const songDisplayElement = document.getElementById('song-display')
+const musicTabElement = document.getElementById('music-tab');
 
 const audioRunner = new AudioRunner();
-const musicPlayer = new MusicPlayer(audioRunner);
+const songDisplay = new SongDisplay(songDisplayElement, musicTabElement);
+const musicPlayer = new MusicPlayer(audioRunner, songDisplay);
+
+songDisplay.render();
 
 const buttonElement = document.getElementById('button')
 const dialog = document.createElement("input");
@@ -25,16 +32,23 @@ const pause = document.getElementById('pause')
 const stop = document.getElementById('stop')
 
 pause.onclick = () => {
-    // audio.pause();
+    musicPlayer.pause();
 }
 
 play.onclick = () => {
-    // audio.play();
+    musicPlayer.play();
 }
 
 stop.onclick = () => {
-    // audio.fastSeek(0);
-    // audio.pause();
+    musicPlayer.stop();
+}
+
+previous.onclick = () => {
+    musicPlayer.playPrevious();
+}
+
+next.onclick = () => {
+    musicPlayer.playNext();
 }
 
 const songs = []

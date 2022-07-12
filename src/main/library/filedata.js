@@ -27,7 +27,6 @@ class Filedata {
     static loadFromPath(filepath) {
         const filename = path.basename(filepath);
         const filebytes = fs.readFileSync(filepath);
-        console.log(filename,filepath, filebytes);
         return new Filedata(filename, filepath, filebytes);
     }
 }

@@ -4,7 +4,7 @@ const reload = require('electron-reload');
 const {Filedata} = require("../library/filedata.js");
 
 
-reload(__dirname, {
+reload(path.join(__dirname, '../../..'), {
     electron: path.join(__dirname, '../../..', 'node_modules', '.bin', 'electron')
 });
 

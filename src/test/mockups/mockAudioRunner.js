@@ -3,15 +3,19 @@ import {IAudioRunner} from "../../main/library/IAudioRunner";
 export class MockAudioRunner extends IAudioRunner {
 
     playFile = null;
-    isPlaying = false;
+    _isPlaying = false;
+
+    isPlaying() {
+        return this._isPlaying;
+    }
 
     play(filedata) {
         this.playFile = filedata;
-        this.isPlaying = true;
+        this._isPlaying = true;
     }
 
     stop() {
         this.playFile = null;
-        this.isPlaying = false;
+        this._isPlaying = false;
     }
 }

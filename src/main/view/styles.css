@@ -20,7 +20,7 @@ body {
     max-height: 20%;
     align-content: center;
     background: #2f2f2f;
-    padding:1rem;
+    padding:0.2rem 0.5rem;
 }
 
 .bottom-panel button{
@@ -35,7 +35,31 @@ body {
 }
 
 .right {
-    padding:1rem;
+    padding:0rem 1rem;
     background: #2a2a2a;
     width: 50%;
+}
+
+#song-display{
+    margin:1rem;
+    padding: 0;
+}
+
+.song-element{
+    color:whitesmoke;
+    padding: 0.2rem;
+    list-style-type: none;
+    font-weight: 400;
+    font-size: 0.8rem;
+    user-select: none;
+    cursor: pointer;
+}
+
+.song-element:hover{
+    background: #585858;
+}
+
+.current-song, .current-song:hover{
+    background: #6f6f6f;
+    color: #2a2a2a;
 }
