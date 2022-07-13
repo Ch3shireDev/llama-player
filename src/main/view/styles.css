@@ -22,16 +22,16 @@ body {
 
 .playback-controls {
     display: inline-grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     align-content: center;
     padding: 0.2rem 0.5rem;
 }
 
-.progress-indicator-container {
+.progress-bar-container {
     display: inline-grid;
 }
 
-#progress-indicator {
+#progress-bar {
     width: 80%;
     margin: 0 auto 1rem;
     background: #2f2f2f;

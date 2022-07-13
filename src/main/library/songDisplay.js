@@ -1,10 +1,13 @@
 import {ISongDisplay} from "./ISongDisplay.js";
 
 export class SongDisplay extends ISongDisplay {
-    constructor(displayElement, musicTabElement) {
+    constructor(document) {
         super();
-        this.displayElement = displayElement;
-        this.musicTabElement = musicTabElement;
+        this.displayElement = document.getElementById('song-display');
+        this.musicTabElement = document.getElementById('music-tab');
+        this.playButton = document.getElementById('play');
+        this.pauseButton = document.getElementById('pause');
+        this.progressBar = document.getElementById('progress-bar');
     }
 
     setMusicPlayer(musicPlayer) {
@@ -30,5 +33,16 @@ export class SongDisplay extends ISongDisplay {
         } else {
             this.musicTabElement.innerText = 'Nie ma muzyki 🥺';
         }
+
+        if (this.musicPlayer.isPlaying()) {
+            this.playButton.style.display = 'none';
+            this.pauseButton.style.display = 'block';
+        } else {
+            this.playButton.style.display = 'block';
+            this.pauseButton.style.display = 'none';
+        }
+
+        this.progressBar.setAttribute("max", this.musicPlayer.getSongLength());
+        this.progressBar.setAttribute("value", this.musicPlayer.getPosition());
     }
 }

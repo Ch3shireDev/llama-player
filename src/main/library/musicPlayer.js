@@ -6,14 +6,19 @@ export class MusicPlayer {
     /**
      * @param {IAudioRunner} audioRunner
      * @param {ISongDisplay} songDisplay
+     * @param document
      */
-    constructor(audioRunner, songDisplay) {
+    constructor(audioRunner, songDisplay, document = undefined) {
         this.audioRunner = audioRunner;
         this.songDisplay = songDisplay;
         this.songDisplay.setMusicPlayer(this);
+        let self = this;
+        if (document !== undefined) document.addEventListener("songFinish", () => {
+            self.playNext()
+        });
     }
 
-    refresh(){
+    refresh() {
         this.songDisplay.render();
     }
 
@@ -67,7 +72,7 @@ export class MusicPlayer {
     }
 
     play() {
-        if(this.audioRunner.isPlaying()) return;
+        if (this.audioRunner.isPlaying()) return;
         this.audioRunner.play(this.currentSong);
         this._isPlaying = true;
         this.refresh();
@@ -80,14 +85,14 @@ export class MusicPlayer {
     }
 
     pause() {
-        if(!this.audioRunner.isPlaying()) return;
+        if (!this.audioRunner.isPlaying()) return;
         this.audioRunner.pause();
         this._isPlaying = false;
         this.refresh();
     }
 
     stop() {
-        if(!this.audioRunner.isPlaying()) return;
+        if (!this.audioRunner.isPlaying()) return;
         this.audioRunner.stop();
         this._isPlaying = false;
         this.refresh();
@@ -99,5 +104,9 @@ export class MusicPlayer {
 
     getPosition() {
         return this.audioRunner.getPosition();
+    }
+
+    getSongLength() {
+        return this.audioRunner.getSongLength();
     }
 }

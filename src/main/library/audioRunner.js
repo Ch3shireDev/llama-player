@@ -6,8 +6,9 @@ export class AudioRunner extends IAudioRunner {
         this.audio = new Audio();
         this._isPlaying = false;
         this.currentPosition = 0;
+        this.duration = 0;
+        this.songFinish = new Event("songFinish");
     }
-
 
     isPlaying() {
         return this._isPlaying;
@@ -19,8 +20,20 @@ export class AudioRunner extends IAudioRunner {
         }));
 
         this.audio.currentTime = this.currentPosition;
-        this.audio.play();
         this._isPlaying = true;
+
+        let self = this;
+
+        this.audio.addEventListener("timeupdate", function () {
+            self.duration = self.audio.duration;
+            self.currentPosition = self.audio.currentTime;
+            if (self.currentPosition >= self.duration - 0.1) {
+                document.dispatchEvent(self.songFinish);
+            }
+        });
+
+        this.audio.play();
+
     }
 
     stop() {
@@ -37,10 +50,16 @@ export class AudioRunner extends IAudioRunner {
     }
 
     setPosition(position) {
-        this.audio.fastSeek(position);
+        this.audio.currentTime = position;
     }
 
     getPosition() {
-        return this.audio.currentTime;
+        return this.currentPosition;
+    }
+
+    getSongLength() {
+        if (isFinite(this.duration))
+            return this.duration;
+        else return 1;
     }
 }

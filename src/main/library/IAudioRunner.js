@@ -8,4 +8,5 @@ export class IAudioRunner {
     pause(){}
     setPosition(position){}
     getPosition(){}
+    getSongLength(){}
 }
